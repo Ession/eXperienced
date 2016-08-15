@@ -1,0 +1,12 @@
+-- =============================================================================
+--
+--       Filename:  eXperienced.lua
+--
+--    Description:  A simple experience bar.
+--
+--        Version:  7.0.1
+--
+--         Author:  Mathias Jost (mail@mathiasjost.com)
+--
+-- =============================================================================
+

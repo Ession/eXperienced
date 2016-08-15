@@ -1,0 +1,7 @@
+## Interface: 70000
+## Version: 7.0.1
+## Title: eXperienced
+## Notes: A Simple experience bar.
+## Author: Ession
+
+eXperienced.lua
