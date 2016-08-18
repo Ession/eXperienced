@@ -33,7 +33,7 @@ local eXperienced = CreateFrame("Frame", "eXperienced", UIParent)
 
 eXperienced:SetFrameStrata("BACKGROUND")
 eXperienced:SetWidth(GetScreenWidth())
-eXperienced:SetHeight(1)
+eXperienced:SetHeight(2)
 eXperienced:SetPoint("TOP")
 eXperienced:Show()
 
@@ -77,7 +77,7 @@ eXperienced:SetScript("OnEvent", function(self, event, ...)
 	ExperienceText:SetText(string.format("%d/%d (%.1f%%) R: %.1f%%", XPCurrent, XPMax, XPCurrentPercent(), XPRestedPercent()))
 
 	-- set the value of the rested xp bar
-	-- eXperiencedRested:SetValue(XPRestedBarFill)
+	eXperiencedRested:SetValue(XPRestedBarFill)
 
 	-- set the value of the current xp bar
 	eXperiencedCurrent:SetValue(XPCurrentPercent())
@@ -101,8 +101,9 @@ ExperienceText:Hide()
 local eXperiencedRested = CreateFrame("StatusBar", "eXperiencedRested", eXperienced)
 
 eXperiencedRested:SetWidth(GetScreenWidth())
-eXperiencedRested:SetHeight(1)  
+eXperiencedRested:SetHeight(2)  
 eXperiencedRested:SetMinMaxValues(0, 100)
+eXperiencedRested:SetFrameStrata("MEDIUM")
 eXperiencedRested:SetStatusBarTexture("Interface\\AddOns\\eXperienced\\Smudge.tga")
 eXperiencedRested:SetStatusBarColor(0.1, 0.1, 0.1, 0.5)
 eXperiencedRested:SetPoint("TOPLEFT")
@@ -115,8 +116,9 @@ eXperiencedRested:Show()
 local eXperiencedCurrent = CreateFrame("StatusBar", "eXperiencedCurrent", eXperienced)
 
 eXperiencedCurrent:SetWidth(GetScreenWidth())
-eXperiencedCurrent:SetHeight(1)  
+eXperiencedCurrent:SetHeight(2)  
 eXperiencedCurrent:SetMinMaxValues(0, 100)
+eXperiencedCurrent:SetFrameStrata("HIGH")
 eXperiencedCurrent:SetStatusBarTexture("Interface\\AddOns\\eXperienced\\Smudge.tga")
 eXperiencedCurrent:SetStatusBarColor(1.0, 1.0, 1.0, 1.0)
 eXperiencedCurrent:SetPoint("TOPLEFT")
