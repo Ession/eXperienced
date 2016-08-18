@@ -60,6 +60,14 @@ eXperienced:RegisterEvent("PLAYER_LOGIN")
 -- -----------------------------------------------------------------------------
 eXperienced:SetScript("OnEvent", function(self, event, ...)
 
+	-- get the rested xp percentage
+	if XPRestedPercent() + XPCurrentPercent() >= 100 then
+		XPRestedBarFill = 100
+	else
+		XPRestedBarFill = XPRestedPercent() + XPCurrentPercent()
+	end
+
+
 	-- Get xp values
 	XPCurrent = UnitXP("player")
 	XPMax = UnitXPMax("player")
@@ -67,6 +75,12 @@ eXperienced:SetScript("OnEvent", function(self, event, ...)
 
 	-- set the text display to the current values
 	ExperienceText:SetText(string.format("%d/%d (%.1f%%) R: %.1f%%", XPCurrent, XPMax, XPCurrentPercent(), XPRestedPercent()))
+
+	-- set the value of the rested xp bar
+	-- eXperiencedRested:SetValue(XPRestedBarFill)
+
+	-- set the value of the current xp bar
+	eXperiencedCurrent:SetValue(XPCurrentPercent())
 
 end)
 
@@ -84,21 +98,13 @@ ExperienceText:Hide()
 -- -----------------------------------------------------------------------------
 -- create the rested xp bar display
 -- -----------------------------------------------------------------------------
-if XPRestedPercent() + XPCurrentPercent() >= 100 then
-	XPRestedBarWidth = GetScreenWidth()
-else
-	XPRestedBarWidth = (XPRestedPercent() + XPCurrentPercent()) * GetScreenWidth() / 100
-end
+local eXperiencedRested = CreateFrame("StatusBar", "eXperiencedRested", eXperienced)
 
-local eXperiencedRested = CreateFrame("Frame", "eXperiencedRested", eXperienced)
-
-eXperiencedRested:SetFrameStrata("BACKGROUND")
-eXperiencedRested:SetWidth(XPRestedBarWidth)
+eXperiencedRested:SetWidth(GetScreenWidth())
 eXperiencedRested:SetHeight(1)  
-eXperiencedRested:SetAlpha(1.0)
-eXperiencedRested:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background"})
-eXperiencedRested:SetBackdropColor(1,1,1,1)
-
+eXperiencedRested:SetMinMaxValues(0, 100)
+eXperiencedRested:SetStatusBarTexture("Interface\\AddOns\\eXperienced\\Smudge.tga")
+eXperiencedRested:SetStatusBarColor(0.1, 0.1, 0.1, 0.5)
 eXperiencedRested:SetPoint("TOPLEFT")
 eXperiencedRested:Show()
 
@@ -106,17 +112,13 @@ eXperiencedRested:Show()
 -- -----------------------------------------------------------------------------
 -- create the current xp bar display
 -- -----------------------------------------------------------------------------
-XPCurrentBarWidth = XPCurrentPercent() * GetScreenWidth() / 100
+local eXperiencedCurrent = CreateFrame("StatusBar", "eXperiencedCurrent", eXperienced)
 
-local eXperiencedCurrent = CreateFrame("Frame", "eXperiencedCurrent", eXperienced)
-
-eXperiencedCurrent:SetFrameStrata("BACKGROUND")
-eXperiencedCurrent:SetWidth(XPCurrentBarWidth)
+eXperiencedCurrent:SetWidth(GetScreenWidth())
 eXperiencedCurrent:SetHeight(1)  
-eXperiencedCurrent:SetAlpha(1.0)
-eXperiencedCurrent:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background"})
-eXperiencedCurrent:SetBackdropColor(0,0,1,1)
-
+eXperiencedCurrent:SetMinMaxValues(0, 100)
+eXperiencedCurrent:SetStatusBarTexture("Interface\\AddOns\\eXperienced\\Smudge.tga")
+eXperiencedCurrent:SetStatusBarColor(1.0, 1.0, 1.0, 1.0)
 eXperiencedCurrent:SetPoint("TOPLEFT")
 eXperiencedCurrent:Show()
 
