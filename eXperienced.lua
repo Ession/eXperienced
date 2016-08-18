@@ -67,7 +67,6 @@ eXperienced:SetScript("OnEvent", function(self, event, ...)
 		XPRestedBarFill = XPRestedPercent() + XPCurrentPercent()
 	end
 
-
 	-- Get xp values
 	XPCurrent = UnitXP("player")
 	XPMax = UnitXPMax("player")
@@ -105,7 +104,7 @@ eXperiencedRested:SetHeight(2)
 eXperiencedRested:SetMinMaxValues(0, 100)
 eXperiencedRested:SetFrameStrata("MEDIUM")
 eXperiencedRested:SetStatusBarTexture("Interface\\AddOns\\eXperienced\\Smudge.tga")
-eXperiencedRested:SetStatusBarColor(0.1, 0.1, 0.1, 0.5)
+eXperiencedRested:SetStatusBarColor(1.0, 1.0, 1.0, 0.6)
 eXperiencedRested:SetPoint("TOPLEFT")
 eXperiencedRested:Show()
 
