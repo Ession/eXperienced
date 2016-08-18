@@ -14,7 +14,7 @@
 -- Return rested XP percentage
 -- -----------------------------------------------------------------------------
 local function XPRestedPercent()
-	return GetXPExhaustion("player") * 100 / UnitXPMax("player")
+	return GetXPExhaustion("player") / UnitXPMax("player") * 100
 end
 
 
@@ -22,7 +22,7 @@ end
 -- Return current XP percentage
 -- -----------------------------------------------------------------------------
 local function XPCurrentPercent()
-	return UnitXP("player") * 100 / UnitXPMax("player")
+	return UnitXP("player") / UnitXPMax("player") * 100
 end
 
 
@@ -41,9 +41,6 @@ eXperienced:Show()
 -- -----------------------------------------------------------------------------
 -- Variables
 -- -----------------------------------------------------------------------------
-local XPCurrent
-local XPMax
-local XPRested
 local XPRestedBarWidth
 local XPCurrentBarWidth
 
@@ -67,13 +64,8 @@ eXperienced:SetScript("OnEvent", function(self, event, ...)
 		XPRestedBarFill = XPRestedPercent() + XPCurrentPercent()
 	end
 
-	-- Get xp values
-	XPCurrent = UnitXP("player")
-	XPMax = UnitXPMax("player")
-	XPRested = GetXPExhaustion("player")
-
 	-- set the text display to the current values
-	ExperienceText:SetText(string.format("%d/%d (%.1f%%) R: %.1f%%", XPCurrent, XPMax, XPCurrentPercent(), XPRestedPercent()))
+	ExperienceText:SetText(string.format("%d/%d (%.1f%%) R: %.1f%%", UnitXP("player"), UnitXPMax("player"), XPCurrentPercent(), XPRestedPercent()))
 
 	-- set the value of the rested xp bar
 	eXperiencedRested:SetValue(XPRestedBarFill)
@@ -128,9 +120,7 @@ eXperiencedCurrent:Show()
 -- Show the experience text
 -- -----------------------------------------------------------------------------
 eXperienced:SetScript("OnEnter", function(self, motion)
-
 	ExperienceText:Show()
-
 end)
 
 
@@ -138,7 +128,5 @@ end)
 -- Hide the experience text
 -- -----------------------------------------------------------------------------
 eXperienced:SetScript("OnLeave", function(self, motion)
-
 	ExperienceText:Hide()
-
 end)
