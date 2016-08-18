@@ -70,6 +70,9 @@ eXperienced:SetScript("OnEvent", function(self, event, ...)
 	-- set the value of the rested xp bar
 	eXperiencedRested:SetValue(XPRestedBarFill)
 
+	-- set the value of the spark bar slightly higher than the xp bar
+	eXperiencedSpark:SetValue(XPCurrentPercent() + 0.1)
+
 	-- set the value of the current xp bar
 	eXperiencedCurrent:SetValue(XPCurrentPercent())
 
@@ -94,11 +97,25 @@ local eXperiencedRested = CreateFrame("StatusBar", "eXperiencedRested", eXperien
 eXperiencedRested:SetWidth(GetScreenWidth())
 eXperiencedRested:SetHeight(2)  
 eXperiencedRested:SetMinMaxValues(0, 100)
-eXperiencedRested:SetFrameStrata("MEDIUM")
+eXperiencedRested:SetFrameStrata("LOW")
 eXperiencedRested:SetStatusBarTexture("Interface\\AddOns\\eXperienced\\Smudge.tga")
 eXperiencedRested:SetStatusBarColor(1.0, 1.0, 1.0, 0.6)
 eXperiencedRested:SetPoint("TOPLEFT")
 eXperiencedRested:Show()
+
+-- -----------------------------------------------------------------------------
+-- create the spark bar display
+-- -----------------------------------------------------------------------------
+local eXperiencedSpark = CreateFrame("StatusBar", "eXperiencedSpark", eXperienced)
+
+eXperiencedSpark:SetWidth(GetScreenWidth())
+eXperiencedSpark:SetHeight(2)  
+eXperiencedSpark:SetMinMaxValues(0, 100)
+eXperiencedSpark:SetFrameStrata("MEDIUM")
+eXperiencedSpark:SetStatusBarTexture("Interface\\AddOns\\eXperienced\\Solid.tga")
+eXperiencedSpark:SetStatusBarColor(1.0, 1.0, 1.0, 1.0)
+eXperiencedSpark:SetPoint("TOPLEFT")
+eXperiencedSpark:Show()
 
 
 -- -----------------------------------------------------------------------------
