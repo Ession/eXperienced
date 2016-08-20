@@ -14,7 +14,7 @@
 -- Return rested XP percentage
 -- -----------------------------------------------------------------------------
 local function XPRestedPercent()
-	return GetXPExhaustion("player") / UnitXPMax("player") * 100
+	return (GetXPExhaustion("player") or 0) / UnitXPMax("player") * 100
 end
 
 
